@@ -1,0 +1,15 @@
+bazel_dep(name = "rules_cc", version = "0.2.14")
+bazel_dep(name = "platforms", version = "1.0.0")
+
+register_toolchains(
+    "//toolchain:cc_toolchain_for_linux_x86_64",
+)
+
+http_archive = use_repo_rule("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
+
+http_archive(
+    name = "linux_x86_64_cc_tools",
+    build_file_content = """exports_files(glob(["**"]))\n""",
+    url = "https://github.com/Ahajha/bazel-sandbox/releases/download/0.0.1/tools.tar.gz",
+    integrity = "sha256-ZbY6833WmpPcmj6Tq161M7c7PA+jt9whIqdRCUNWD0Y=",
+)
