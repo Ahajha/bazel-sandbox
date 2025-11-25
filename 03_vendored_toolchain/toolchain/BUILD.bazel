@@ -1,3 +1,4 @@
+load("@rules_cc//cc/toolchains:args.bzl", "cc_args")
 load("@rules_cc//cc/toolchains:tool.bzl", "cc_tool")
 load("@rules_cc//cc/toolchains:tool_map.bzl", "cc_tool_map")
 load("@rules_cc//cc/toolchains:toolchain.bzl", "cc_toolchain")
@@ -5,6 +6,17 @@ load("@rules_cc//cc/toolchains:toolchain.bzl", "cc_toolchain")
 cc_tool(
     name = "clang",
     src = "@linux_x86_64_cc_tools//:clang-21",
+)
+
+cc_args(
+    name = "no_canonical_prefixes",
+    actions = [
+        "@rules_cc//cc/toolchains/actions:compile_actions",
+    ],
+    args = [
+        "-no-canonical-prefixes",
+        "-nostdinc",
+    ],
 )
 
 cc_tool_map(
@@ -17,6 +29,7 @@ cc_tool_map(
 
 cc_toolchain(
     name = "linux_x86_64_clang_toolchain",
+    args = [":no_canonical_prefixes"],
     tool_map = ":tools",
 )
 
