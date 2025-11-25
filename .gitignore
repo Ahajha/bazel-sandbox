@@ -1,1 +1,5 @@
 bazel-*
+
+# Scratch directories
+llvm
+tools
