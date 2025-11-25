@@ -2,6 +2,15 @@ load("@rules_cc//cc/toolchains:args.bzl", "cc_args")
 load("@rules_cc//cc/toolchains:tool.bzl", "cc_tool")
 load("@rules_cc//cc/toolchains:tool_map.bzl", "cc_tool_map")
 load("@rules_cc//cc/toolchains:toolchain.bzl", "cc_toolchain")
+load("@rules_cc//cc/toolchains/args:sysroot.bzl", "cc_sysroot")
+
+cc_sysroot(
+    name = "sysroot",
+    data = [
+        "@sysroot-focal-x86_64",
+    ],
+    sysroot = "@sysroot-focal-x86_64//:root",
+)
 
 cc_tool(
     name = "clang",
@@ -29,7 +38,10 @@ cc_tool_map(
 
 cc_toolchain(
     name = "linux_x86_64_clang_toolchain",
-    args = [":no_canonical_prefixes"],
+    args = [
+        ":sysroot",
+        ":no_canonical_prefixes",
+    ],
     tool_map = ":tools",
 )
 

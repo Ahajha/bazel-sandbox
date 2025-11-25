@@ -1,4 +1,3 @@
-bazel_dep(name = "bazel_skylib", version = "1.7.1")
 bazel_dep(name = "platforms", version = "1.0.0")
 bazel_dep(name = "rules_cc", version = "0.2.14")
 
@@ -15,8 +14,10 @@ http_archive(
     integrity = "sha256-ZbY6833WmpPcmj6Tq161M7c7PA+jt9whIqdRCUNWD0Y=",
 )
 
-http_archive(
-    name = "linux_x86_64_sysroot",
+# TODO: Update to latest bazel-cc-sysroot-generator
+bazel_dep(name = "sysroot-focal-x86_64")
+archive_override(
+    module_name = "sysroot-focal-x86_64",
     url = "https://github.com/Ahajha/bazel-sandbox/releases/download/0.0.1/sysroot-focal-x86_64.tar.xz",
-    integrity = "sha256-sYrXSw05e+dSZQGzzycnnRaNK1+y4i1YipE+V+BNtyM=",
+    integrity = "sha256-kjEtjKSXyeDiTKE+0nP/wf5K2hb3JvIrmumnKOmT61A=",
 )
