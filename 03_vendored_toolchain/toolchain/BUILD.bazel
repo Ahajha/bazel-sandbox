@@ -24,7 +24,6 @@ cc_args(
     ],
     args = [
         "-no-canonical-prefixes",
-        "-nostdinc",
     ],
 )
 
